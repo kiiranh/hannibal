@@ -7,6 +7,7 @@ package models
 import collection.mutable.MutableList
 import globals._
 import java.util.Date
+import play.api.Logger
 
 case class Compaction(region: String, start: Date, end: Date)
 
@@ -19,6 +20,7 @@ object Compaction {
   }
 
   def all(): Seq[Compaction] = {
+    Logger.info("Entering compaction all...")
     var resultList = MutableList[Compaction]()
     LogFile.all().foreach {
       logFile =>
@@ -35,6 +37,7 @@ object Compaction {
             + "' please check logfile.date-format in application.conf");
         }
     }
+    Logger.info("Exiting compaction all...")
     resultList.toList
   }
 }

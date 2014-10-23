@@ -31,12 +31,14 @@ object Global extends GlobalSettings {
       System.exit(1);
     }
 
-    if (app.mode != Mode.Test) {
-      Logger.info("Application has started in " + app.mode + "-Mode with " + globals.hBaseContext.toString + ", starting Update-Metrics-Actor")
+    val role = Play.current.configuration.getString("ha.role").get
+    Logger.info("CURRENT HA MODE: " + role);
+    if (app.mode != Mode.Test && role == "active") {
+      Logger.info("Application has started in " + app.mode + "-Mode " + role + " role with " + globals.hBaseContext.toString + ", starting Update-Metrics-Actor")
       UpdateMetricsActor.initialize( app.configuration )
 
     } else {
-      Logger.info("Application has started in " + app.mode + "\"-Mode, do not start Update-Metrics-Actor")
+      Logger.info("Application has started in " + app.mode + "-Mode " + role + " role, do not start Update-Metrics-Actor")
     }
   }
 
