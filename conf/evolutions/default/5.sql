@@ -4,7 +4,7 @@
 
 CREATE TABLE region (
     hash VARCHAR(255),
-    name VARCHAR(65536)
+    name TEXT
 );
 CREATE UNIQUE INDEX region_hash ON region(hash);
 

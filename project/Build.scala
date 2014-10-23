@@ -24,7 +24,8 @@ object ApplicationBuild extends Build {
       cache,
       json,
       ws,
-      "org.slf4j" % "slf4j-log4j12" % "1.6.0"
+      "org.slf4j" % "slf4j-log4j12" % "1.6.0",
+      "mysql" % "mysql-connector-java" % "5.1.33"
     ) ++ (hBaseVersion match {
       case "0.90" => Seq(
         "org.apache.hadoop" % "hadoop-core" % "0.20.205.0",
